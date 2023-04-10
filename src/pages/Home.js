@@ -3,6 +3,7 @@ import { ReactFloatingBalloons } from "react-floating-balloons";
 import { useState } from "react";
 
 import gif from "../assets/kittenGif.gif";
+import happyKitten from "../assets/happyKitten.gif"
 
 const name = window.location.pathname.split("/")[1];
 
@@ -11,6 +12,7 @@ const Home = () => {
   const [no, setNo] = useState(false);
   const [bottom, setBottom] = useState(true);
   const [caution, setCaution] = useState(false)
+  const [excited, setExcited] = useState(false)
 
   return (
     <Container
@@ -47,37 +49,70 @@ const Home = () => {
           </Button>
         )}
       </div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          flexDirection: "column",
-          alignItems: "center",
-          position: "relative",
-        }}
-      >
-        <img src={gif} width="40%" />
-        <p
+      {!excited ? (
+        <div
           style={{
-            position: "absolute",
-            bottom: "0",
-            color: "white",
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "column",
+            alignItems: "center",
+            position: "relative",
           }}
         >
-          🥺 Please
-        </p>
-      </div>
+          <img src={gif} width="40%" />
+          <p
+            style={{
+              position: "absolute",
+              bottom: "0",
+              color: "white",
+            }}
+          >
+            🥺 Please
+          </p>
+        </div>
+      ) : (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "column",
+            alignItems: "center",
+            position: "relative",
+          }}
+        >
+          <img src={happyKitten} width="40%" />
+          <p
+            style={{
+              position: "absolute",
+              bottom: "0",
+              color: "#F54D28",
+            }}
+          >
+            😎 WoooHooo!!!
+          </p>
+        </div>
+      )}
+
       <br />
-      <Button onClick={() => {
-        setYes(true);
-        setNo(true);
-        setCaution(false)
-      }} variant="contained" color="success">
+      <Button
+        onClick={() => {
+          setYes(true);
+          setNo(true);
+          setCaution(false);
+          setExcited(true);
+        }}
+        variant="contained"
+        color="success"
+      >
         🙂 Yes!
       </Button>
       <br />
       {bottom && !no && !caution && (
-        <Button onClick={() => setCaution(true)} variant="contained" color="error">
+        <Button
+          onClick={() => setCaution(true)}
+          variant="contained"
+          color="error"
+        >
           😦 No
         </Button>
       )}
